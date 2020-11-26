@@ -3,9 +3,37 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 
 export default class App extends React.Component {
   state={
-    email:"",
-    password:""
+    student_id:"",
+    password:"",
   }
+
+  continue = e => {
+    e.preventDefault();
+
+    const {student_id, password } = this.state;
+    let student = {};
+
+    login(student).then(res => {
+       if (res) {
+          let statusCode = res.statusCode;
+          console.log(statusCode);
+          if(statusCode === 'S2000'){
+             console.log(res.authToken);
+             //localStorage.setItem('usertoken', res.authToken);
+             setUserToken(res.authToken);
+             this.setState({validInput: true});
+             window.location.href = '/home';
+          }
+          else {
+             this.setState({validInput: false, invalidMsg: res.error});
+          }
+       }
+       else {
+          console.log('Error');
+       }
+    })
+ }
+
   render(){
     return (
       <View style={styles.container}>
@@ -28,7 +56,7 @@ export default class App extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={this.continue} >
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
 
