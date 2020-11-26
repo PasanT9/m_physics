@@ -1,0 +1,12 @@
+{
+  "name": "m_physics",
+  "displayName": "m_physics",
+  "expo": {
+    "name": "m_physics",
+    "slug": "m_physics",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
