@@ -1,20 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { login } from "./Functions";
 
-export default class App extends React.Component {
+class Login extends React.Component {
   state={
     student_id:"",
     password:"",
   }
 
   continue = e => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     const {student_id, password } = this.state;
-    let student = {};
+    let student = {
+      student_id: student_id,
+      password: password,
+    };
 
     login(student).then(res => {
-       if (res) {
+      console.log(res);
+       /*if (res) {
           let statusCode = res.statusCode;
           console.log(statusCode);
           if(statusCode === 'S2000'){
@@ -30,7 +35,7 @@ export default class App extends React.Component {
        }
        else {
           console.log('Error');
-       }
+       }*/
     })
  }
 
@@ -43,7 +48,7 @@ export default class App extends React.Component {
             style={styles.inputText}
             placeholder="Student ID..." 
             placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({email:text})}/>
+            onChangeText={text => this.setState({student_id:text})}/>
         </View>
         <View style={styles.inputView} >
           <TextInput  
@@ -65,6 +70,7 @@ export default class App extends React.Component {
     );
   }
 }
+export default Login;
 
 const styles = StyleSheet.create({
   container: {

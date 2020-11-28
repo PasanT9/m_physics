@@ -1,12 +1,16 @@
 export const login = student => {
     const data = {
        student_id: student.student_id,
-       password: password,
+       password: student.password,
     };
- 
-    return fetch(global.config.backend + '/api/login/', {
+
+    console.log(data);
+  
+    return fetch('http://localhost:8081/api/login/', {
        method: 'POST',
-       headers: {},
+       headers: {
+         "Content-type": "application/json"
+       },
        body: JSON.stringify(data)
     })
     .then((response) => response.json())
