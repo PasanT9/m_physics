@@ -18,24 +18,14 @@ class Login extends React.Component {
     };
 
     login(student).then(res => {
-      console.log(res);
-       /*if (res) {
-          let statusCode = res.statusCode;
-          console.log(statusCode);
-          if(statusCode === 'S2000'){
-             console.log(res.authToken);
-             //localStorage.setItem('usertoken', res.authToken);
-             setUserToken(res.authToken);
-             this.setState({validInput: true});
-             window.location.href = '/home';
-          }
-          else {
-             this.setState({validInput: false, invalidMsg: res.error});
-          }
+      console.log("SUCCESS");
+       if (res.status == 200) {
+          console.log("login success");
+          this.props.navigation.navigate('Home')
        }
        else {
-          console.log('Error');
-       }*/
+          console.log('login failed');
+       }
     })
  }
 

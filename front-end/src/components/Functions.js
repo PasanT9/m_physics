@@ -6,14 +6,13 @@ export const login = student => {
 
     console.log(data);
   
-    return fetch('http://localhost:8081/api/login/', {
+    return fetch('http://localhost:8081/user/login/', {
        method: 'POST',
        headers: {
          "Content-type": "application/json"
        },
        body: JSON.stringify(data)
     })
-    .then((response) => response.json())
     .then(response => {
        return response;
     })
