@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { Video } from 'expo';
-import { MaterialIcons, Octicons } from '@expo/vector-icons';
+import { Video } from 'expo-av';
+
 
 
 export default class Home extends React.Component {
@@ -15,55 +15,31 @@ export default class Home extends React.Component {
       const { width } = Dimensions.get('window');      
       
       return (
-         <View style={styles.container}>
-            <View>
-               <Text style={{ textAlign: 'center' }}>
-                   React Native Video</Text>
-               <Video
-                 source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
-                 shouldPlay={this.state.shouldPlay}
-                 resizeMode="cover"
-                 style={{ width, height: 300 }}
-                 isMuted={this.state.mute}
-               />               
-               
-               <View style={styles.controlBar}>
-                   <MaterialIcons
-                      name={this.state.mute ? "volume-mute" :
-                          "volume-up"}
-                      size={45}
-                      color="white"
-                      onPress={this.handleVolume}
-                   />
-                   <MaterialIcons
-                      name={this.state.shouldPlay ? "pause" : 
-                           "play-arrow"}
-                      size={45}
-                      color="white"
-                      onPress={this.handlePlayAndPause}
-                   />
-               </View>
-            </View>
+         <View >
+            <Video
+               source={{ uri: 'http://192.168.8.101:8081/api/media/video?id=nirvana' }}
+               rate={1.0}
+               volume={1.0}
+               isMuted={false}
+               resizeMode="cover"
+               shouldPlay
+               useNativeControls
+               isLooping
+               resizeMode="contain"
+               style={{ width: "100%", height: "50%" }}
+               />
+
         </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-   },   controlBar: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: 45,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-   }
-});
+var styles = StyleSheet.create({
+   backgroundVideo: {
+     position: 'absolute',
+     top: 0,
+     left: 0,
+     bottom: 0,
+     right: 0,
+   },
+ });

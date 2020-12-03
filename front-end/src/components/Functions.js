@@ -6,7 +6,7 @@ export const login = student => {
 
     console.log(data);
   
-    return fetch('http://localhost:8081/user/login/', {
+    return fetch('http://192.168.8.101:8081/user/login/', {
        method: 'POST',
        headers: {
          "Content-type": "application/json"
