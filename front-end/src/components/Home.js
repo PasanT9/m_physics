@@ -17,7 +17,7 @@ export default class Home extends React.Component {
       return (
          <View >
             <Video
-               source={{ uri: 'http://192.168.8.101:8081/api/media/video?id=nirvana' }}
+               source={{ uri: 'http://192.168.8.101:8081/api/media' }}
                rate={1.0}
                volume={1.0}
                isMuted={false}
