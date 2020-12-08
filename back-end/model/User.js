@@ -13,7 +13,10 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now()
   }
+},
+{
+ collection : 'users' 
 });
 
 // export model user with UserSchema
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model("users", UserSchema);

@@ -15,9 +15,9 @@ export default class Home extends React.Component {
       const { width } = Dimensions.get('window');      
       
       return (
-         <View >
+         /*<View >
             <Video
-               source={{ uri: 'http://192.168.8.101:8081/api/media' }}
+               source={{ uri: 'http://192.168.8.101:8081/media/watch' }}
                rate={1.0}
                volume={1.0}
                isMuted={false}
@@ -29,7 +29,8 @@ export default class Home extends React.Component {
                style={{ width: "100%", height: "50%" }}
                />
 
-        </View>
+        </View>*/
+        
     );
   }
 }
