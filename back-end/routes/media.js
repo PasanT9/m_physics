@@ -90,46 +90,32 @@ function StreamGridFile(req, res, GridFile) {
         let user = await AccessList.findOne({
           student_id
         });
-        console.log(user);
-        let allowed_media = user.media;
-        console.log(allowed_media[0])
 
-          let media =  await Media.find({
-            media_id: allowed_media
-          });
-          console.log(media);
         if (!user){
           return res.status(400).json({
             message: "User Not Exist"
           });
         }
 
+        let allowed_media = user.media;
 
+        let media =  await Media.find({
+          media_id: allowed_media
+        });
+
+        console.log(media);
+
+        //let thumbnails = media.map(a => a.thumbnail);
+        res.status(200).json({
+          media
+        });
       }
       catch(e)
       {
-        console.log(e)
-      }
-  
-        /*jwt.sign(
-          payload,
-          "randomString",
-          {
-            expiresIn: 3600
-          },
-          (err, token) => {
-            if (err) throw err;
-            res.status(200).json({
-              token
-            });
-          }
-        );
-      } catch (e) {
-        console.error(e);
         res.status(500).json({
           message: "Server Error"
         });
-      }*/
+      }
     }
   );
 
