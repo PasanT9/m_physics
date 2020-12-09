@@ -1,20 +1,39 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Video } from 'expo-av';
-
-
+import { listMedia } from "./Functions";
 
 export default class Home extends React.Component {
 
     state = {
+        student_id: '',
         mute: false,
         shouldPlay: true,
     }
+
+    getMediaList = () => {
+
+      let {student_id} = this.state;
+
+      listMedia(student_id).then(res => {
+        console.log(res.media);
+      });
+
+   }
+
+   componentDidMount(){
+
+    this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
+      this.getMediaList();
+    });
+
+   }
 
    render() {
       const { width } = Dimensions.get('window');      
       
       return (
+        <View />
          /*<View >
             <Video
                source={{ uri: 'http://192.168.8.101:8081/media/watch' }}

@@ -14,18 +14,18 @@ const user = require("./routes/user");
 const media = require("./routes/media");
 //app.use('/', mediaRoutes)
 
+app.use(cors());
+app.use(bodyParser.json());
 
 // Initiate Mongo Server
 InitiateMongoServer();
 
-app.use(cors());
 
 
 // PORT
 const PORT = process.env.PORT || 8081;
 
 // Middleware
-app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.json({ message: "API Working" });

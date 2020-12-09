@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import { login } from "./Functions";
 
 class Login extends React.Component {
+
   state={
     student_id:"",
     password:"",
@@ -18,14 +19,8 @@ class Login extends React.Component {
     };
 
     login(student).then(res => {
-      console.log("SUCCESS");
-       if (res.status == 200) {
-          console.log("login success");
-          this.props.navigation.navigate('Home')
-       }
-       else {
-          console.log('login failed');
-       }
+      console.log("login success");
+      this.props.navigation.navigate('Home',{ student_id },)
     })
  }
 
