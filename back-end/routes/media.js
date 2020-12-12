@@ -120,10 +120,10 @@ function StreamGridFile(req, res, GridFile) {
   );
 
 router.get(
-  "/watch",[],
+  "/watch/:id",[],
   async (req, res) => {
       console.log('GET request');
-      new GridStore(mongoose.connection.db, new ObjectID("5fc7cf2ec823ee18556802aa"), null, 'r').open(function(err, GridFile) {
+      new GridStore(mongoose.connection.db, new ObjectID(req.params.id), null, 'r').open(function(err, GridFile) {
         if(!GridFile) {
           res.send(404,'Not Found');
           return;

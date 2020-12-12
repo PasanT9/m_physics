@@ -33,7 +33,7 @@ export default class Home extends React.Component {
            let item = {
               //uri: res.media[i].thumbnail,
               title: res.media[i].name,
-              video_uri: res.media[i].video,
+              video_id: res.media[i].video,
               uri: 'http://localhost:8081/media/thumbnail/'+res.media[i].thumbnail,
               width: 64,
               height: 64
@@ -54,8 +54,8 @@ export default class Home extends React.Component {
     });
    }
 
-   playVideo(id){
-    console.log(id);
+   playVideo(video_id){
+    this.props.navigation.navigate('MediaPlayer',{ video_id },)
   }
 
    render() {
@@ -68,28 +68,13 @@ export default class Home extends React.Component {
             {media_list.map((item, i) => 
             {
               return (
-                <TouchableOpacity style = {styles.container} onPress={() => this.playVideo(item.video_uri)} key={i} >
+                <TouchableOpacity style = {styles.container} onPress={() => this.playVideo(item.video_id)} key={i} >
                   <Image style = {styles.thumbnail} source={item} />
                   <Text style = {styles.text} > {item.title} </Text> 
                 </TouchableOpacity>
               );
             })}
             </ScrollView>
-         /*<View >
-            <Video
-               source={{ uri: 'http://192.168.8.101:8081/media/watch' }}
-               rate={1.0}
-               volume={1.0}
-               isMuted={false}
-               resizeMode="cover"
-               shouldPlay
-               useNativeControls
-               isLooping
-               resizeMode="contain"
-               style={{ width: "100%", height: "50%" }}
-               />
-
-        </View>*/
         
     );
   }

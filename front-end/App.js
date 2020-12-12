@@ -4,11 +4,13 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import Login  from './src/components/Login';
 import Home from './src/components/Home';
+import MediaPlayer from './src/components/MediaPlayer'
 
 const RootStack = createStackNavigator(
   {
     Login: Login,
-    Home: Home
+    Home: Home,
+    MediaPlayer: MediaPlayer
   },
   {
     initialRouteName: "Login",
