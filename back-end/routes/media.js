@@ -134,4 +134,19 @@ router.get(
   }
 );
 
+router.get(
+  "/thumbnail/:id",[],
+  async (req, res) => {
+
+      new GridStore(mongoose.connection.db, new ObjectID(req.params.id), null, 'r').open(function(err, GridFile) {
+        if(!GridFile) {
+          res.send(404,'Not Found');
+          return;
+        }
+        
+        StreamGridFile(req, res, GridFile)
+      });
+  }
+);
+
   module.exports = router;

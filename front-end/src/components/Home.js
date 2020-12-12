@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import { StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Video } from 'expo-av';
 import { listMedia } from "./Functions";
 
@@ -14,6 +14,12 @@ export default class Home extends React.Component {
         media_list : [],
     }
 
+    constructor() {
+      super();
+  
+      this.playVideo = this.playVideo.bind(this);
+    }
+
     getMediaList = () => {
 
       let {student_id} = this.state;
@@ -26,15 +32,16 @@ export default class Home extends React.Component {
         for(let i=0; i<res.media.length;++i){
            let item = {
               //uri: res.media[i].thumbnail,
-              name: res.media[i].name,
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
+              title: res.media[i].name,
+              video_uri: res.media[i].video,
+              uri: 'http://localhost:8081/media/thumbnail/'+res.media[i].thumbnail,
               width: 64,
               height: 64
            }
            media_list.push(item);
         }
         this.setState({ media_list: media_list}, function() {
-          console.log("url: " + this.state.media_list[0].uri);
+          console.log("media list updated");
         });
       });
 
@@ -47,6 +54,10 @@ export default class Home extends React.Component {
     });
    }
 
+   playVideo(id){
+    console.log(id);
+  }
+
    render() {
       const { width } = Dimensions.get('window');     
       const { media_list } = this.state; 
@@ -54,12 +65,14 @@ export default class Home extends React.Component {
       return (
           <ScrollView contentContainerStyle={styles.scrollView}>
 
-            {media_list.map(function(item, i)
+            {media_list.map((item, i) => 
             {
-              return ([
-                <Image source={item} style = {styles.thumbnail} key={i} />,
-                <Text style = {styles.text} > {item.name} </Text>
-              ]);
+              return (
+                <TouchableOpacity style = {styles.container} onPress={() => this.playVideo(item.video_uri)} key={i} >
+                  <Image style = {styles.thumbnail} source={item} />
+                  <Text style = {styles.text} > {item.title} </Text> 
+                </TouchableOpacity>
+              );
             })}
             </ScrollView>
          /*<View >
@@ -89,6 +102,14 @@ const logo = {
 };
 
 var styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    display: 'flex',
+    height: '50%',
+    justifyContent: 'center',
+    marginTop: 20,
+    width: '70%',
+  },
   scrollView: {
     alignItems: 'center',
     display: 'flex',
@@ -103,6 +124,6 @@ var styles = StyleSheet.create({
   thumbnail: {
     marginTop: 70,
     width: '70%',
-    height: '50%',
+    height: '70%',
   },
  });
