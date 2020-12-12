@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 import { Video } from 'expo-av';
 import { listMedia } from "./Functions";
+
+import { Image, ScrollView, Text } from 'react-native';
 
 export default class Home extends React.Component {
 
@@ -9,6 +11,7 @@ export default class Home extends React.Component {
         student_id: '',
         mute: false,
         shouldPlay: true,
+        media_list : [],
     }
 
     getMediaList = () => {
@@ -16,7 +19,23 @@ export default class Home extends React.Component {
       let {student_id} = this.state;
 
       listMedia(student_id).then(res => {
+
         console.log(res.media);
+
+        let media_list = [];
+        for(let i=0; i<res.media.length;++i){
+           let item = {
+              //uri: res.media[i].thumbnail,
+              name: res.media[i].name,
+              uri: 'https://reactnative.dev/img/tiny_logo.png',
+              width: 64,
+              height: 64
+           }
+           media_list.push(item);
+        }
+        this.setState({ media_list: media_list}, function() {
+          console.log("url: " + this.state.media_list[0].uri);
+        });
       });
 
    }
@@ -26,14 +45,23 @@ export default class Home extends React.Component {
     this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
       this.getMediaList();
     });
-
    }
 
    render() {
-      const { width } = Dimensions.get('window');      
+      const { width } = Dimensions.get('window');     
+      const { media_list } = this.state; 
       
       return (
-        <View />
+          <ScrollView contentContainerStyle={styles.scrollView}>
+
+            {media_list.map(function(item, i)
+            {
+              return ([
+                <Image source={item} style = {styles.thumbnail} key={i} />,
+                <Text style = {styles.text} > {item.name} </Text>
+              ]);
+            })}
+            </ScrollView>
          /*<View >
             <Video
                source={{ uri: 'http://192.168.8.101:8081/media/watch' }}
@@ -54,12 +82,27 @@ export default class Home extends React.Component {
   }
 }
 
+const logo = {
+  uri: 'https://reactnative.dev/img/tiny_logo.png',
+  width: 64,
+  height: 64
+};
+
 var styles = StyleSheet.create({
-   backgroundVideo: {
-     position: 'absolute',
-     top: 0,
-     left: 0,
-     bottom: 0,
-     right: 0,
-   },
+  scrollView: {
+    alignItems: 'center',
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    marginTop: 50,
+   //position: "absolute"
+  },
+  text: {
+    marginTop: 5,
+  },
+  thumbnail: {
+    marginTop: 70,
+    width: '70%',
+    height: '50%',
+  },
  });
