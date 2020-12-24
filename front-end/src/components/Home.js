@@ -1,30 +1,52 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
 
 export default class Home extends React.Component {
 
+  state = {
+    student_id: '',
+    icon_list : ["media.png", "notification.png", "papers.jpeg", "profile.png"],
+  }
+
+  continue(icon){
+
+    const {student_id, icon_list} = this.state;
+    if(icon == icon_list[0])
+    {
+      this.props.navigation.navigate('Media',{ student_id },)
+    }
+  }
+
+  componentDidMount(){
+
+    this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
+      console.log("student id updated");
+    });
+   }
 
    render() {
       
+    const { icon_list } = this.state; 
+
       return (
           <View style = {styles.view}>
-            <Image style = {styles.thumbnail} source={logo} />
-            <Image style = {styles.thumbnail} source={logo} />
-            <Image style = {styles.thumbnail} source={logo} />
-            <Image style = {styles.thumbnail} source={logo} />
+
+            {icon_list.map((item, i) => 
+            {
+              return (
+                <TouchableOpacity onPress={() => this.continue(item)}style = {styles.thumbnail} key={i} >
+                  <Image style = {styles.thumbnail} source={require('../images/'+item)} />
+                </TouchableOpacity>
+              );
+            })}
+          
           </View>
         
     );
   }
 }
-
-const logo = {
-  uri: 'https://reactnative.dev/img/tiny_logo.png',
-  width: 64,
-  height: 64
-};
 
 var styles = StyleSheet.create({
 
@@ -40,7 +62,7 @@ var styles = StyleSheet.create({
   },
   thumbnail: {
     margin: 10,
-    width: '30%',
-    height: '30%',
+    width: 120,
+    height: 120,
   },
  });
