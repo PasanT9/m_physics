@@ -19,9 +19,6 @@ export const login = student => {
       if(response.status == 200) {
          return response.json();
       }
-      else{
-         console.log("error");
-      }
    })
     .catch(err => {
        console.log(err)

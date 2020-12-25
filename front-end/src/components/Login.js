@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import { login } from "./Functions";
+
+import * as Animatable from 'react-native-animatable'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -9,6 +11,7 @@ class Login extends React.Component {
   state={
     student_id:"",
     password:"",
+    secure_password: true,
   }
 
   continue = e => {
@@ -21,12 +24,20 @@ class Login extends React.Component {
     };
 
     login(student).then(res => {
-      console.log("login success");
-      this.props.navigation.navigate('Home',{ student_id },)
+      if(res){
+          console.log("login success");
+          this.props.navigation.navigate('Home',{ student_id },)
+      }
+      else{
+        console.log("error");
+      }
     })
  }
 
   render(){
+
+    const { student_id, secure_password } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -47,11 +58,17 @@ class Login extends React.Component {
               autoCapitalize= "none"
               onChangeText={text => this.setState({student_id:text})}
             />
-            <Feather 
-              name="check-circle"
-              color="green"
-              size = {20}
-            />
+            {(student_id.length > 0) ?
+            <Animatable.View
+              animation='bounceIn'
+            >
+              <Feather 
+                name="check-circle"
+                color="green"
+                size = {20}
+              /> 
+            </Animatable.View>
+            : null}
           </View>
           <Text style={[styles.footer_text, {
             marginTop: 35
@@ -64,26 +81,35 @@ class Login extends React.Component {
             />
             <TextInput 
               placeholder="Your Password"
+              
               style={styles.text_input}
-              secureTextEntry={true}
+              secureTextEntry={secure_password}
               autoCapitalize= "none"
               onChangeText={text => this.setState({password:text})}
             />
-            <Feather 
-              name="eye-off"
-              color="grey"
-              size = {20}
+            <TouchableOpacity onPress={() => this.setState({secure_password: !secure_password})}>
+              {secure_password ?
+              <Feather 
+                name="eye-off"
+                color="grey"
+                size = {20}
+              /> :
+              <Feather 
+                name="eye"
+                color="grey"
+                size = {20}
+              /> }
+            </TouchableOpacity>
+          </View>
+          <View style={styles.button_container}>
+            <Button
+              style = {styles.button}
+              onPress={this.continue}
+              title="Sign In"
+              color="#009387"
             />
           </View>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn} onPress={this.continue} >
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-
-  
       </View>
     );
   }
@@ -98,12 +124,20 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
   },  
+  button: {
+    
+  },
+  button_container: {
+    marginTop: 40,
+  },
   footer: {
     flex: 3,
     backgroundColor: "#fff",
-    borderRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
+    width: '100%'
   },
   footer_text: {
     color: '#05375a',
@@ -118,7 +152,7 @@ const styles = StyleSheet.create({
   header_text: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 35,
   },  
   container: {
     flex: 1,
@@ -145,27 +179,10 @@ const styles = StyleSheet.create({
     height:50,
     color:"white"
   },
-  forgot:{
-    color:"white",
-    fontSize:11
-  },
-  loginBtn:{
-    width:"80%",
-    backgroundColor:"#fb5b5a",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:40,
-    marginBottom:10
-  },
-  loginText:{
-    color:"white"
-  },
   text_input: {
     flex: 1,
-    marginTop: -12,
-    paddingBottom: 10,
+    marginLeft: 15,
+    paddingBottom: 2,
     color: '#05375a',
   }
 });
