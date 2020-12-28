@@ -1,12 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import { login } from "./Functions";
+
+import * as Animatable from 'react-native-animatable'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 class Login extends React.Component {
 
   state={
     student_id:"",
     password:"",
+    secure_password: true,
   }
 
   continue = e => {
@@ -19,38 +24,92 @@ class Login extends React.Component {
     };
 
     login(student).then(res => {
-      console.log("login success");
-      this.props.navigation.navigate('Home',{ student_id },)
+      if(res){
+          console.log("login success");
+          this.props.navigation.navigate('Home',{ student_id },)
+      }
+      else{
+        console.log("error");
+      }
     })
  }
 
   render(){
+
+    const { student_id, secure_password } = this.state;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>M_PHYSICS</Text>
-        <View style={styles.inputView} >
-          <TextInput  
-            style={styles.inputText}
-            placeholder="Student ID..." 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({student_id:text})}/>
+        <View style={styles.header}>
+            <Text style={styles.header_text}>M Physics</Text>
         </View>
-        <View style={styles.inputView} >
-          <TextInput  
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Password..." 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({password:text})}/>
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn} onPress={this.continue} >
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+        <View style={styles.footer}>
 
-  
+          <Text style={styles.footer_text}> Student ID </Text>
+          <View style={styles.action}>
+            <FontAwesome 
+              name="user-o"
+              color="#05375a"
+              size={20}
+            />
+            <TextInput 
+              placeholder="Your Student ID"
+              style={styles.text_input}
+              autoCapitalize= "none"
+              onChangeText={text => this.setState({student_id:text})}
+            />
+            {(student_id.length > 0) ?
+            <Animatable.View
+              animation='bounceIn'
+            >
+              <Feather 
+                name="check-circle"
+                color="green"
+                size = {20}
+              /> 
+            </Animatable.View>
+            : null}
+          </View>
+          <Text style={[styles.footer_text, {
+            marginTop: 35
+          }]}> Password </Text>
+          <View style={styles.action}>
+            <Feather 
+              name="lock"
+              color="#05375a"
+              size={20}
+            />
+            <TextInput 
+              placeholder="Your Password"
+              
+              style={styles.text_input}
+              secureTextEntry={secure_password}
+              autoCapitalize= "none"
+              onChangeText={text => this.setState({password:text})}
+            />
+            <TouchableOpacity onPress={() => this.setState({secure_password: !secure_password})}>
+              {secure_password ?
+              <Feather 
+                name="eye-off"
+                color="grey"
+                size = {20}
+              /> :
+              <Feather 
+                name="eye"
+                color="grey"
+                size = {20}
+              /> }
+            </TouchableOpacity>
+          </View>
+          <View style={styles.button_container}>
+            <Button
+              style = {styles.button}
+              onPress={this.continue}
+              title="Sign In"
+              color="#009387"
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -58,9 +117,46 @@ class Login extends React.Component {
 export default Login;
 
 const styles = StyleSheet.create({
+  action: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f2f2f2',
+    paddingBottom: 5,
+  },  
+  button: {
+    
+  },
+  button_container: {
+    marginTop: 40,
+  },
+  footer: {
+    flex: 3,
+    backgroundColor: "#fff",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    width: '100%'
+  },
+  footer_text: {
+    color: '#05375a',
+    fontSize: 18,
+  },  
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  header_text: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 35,
+  },  
   container: {
     flex: 1,
-    backgroundColor: '#003f5c',
+    backgroundColor: '#009387',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -83,21 +179,10 @@ const styles = StyleSheet.create({
     height:50,
     color:"white"
   },
-  forgot:{
-    color:"white",
-    fontSize:11
-  },
-  loginBtn:{
-    width:"80%",
-    backgroundColor:"#fb5b5a",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:40,
-    marginBottom:10
-  },
-  loginText:{
-    color:"white"
+  text_input: {
+    flex: 1,
+    marginLeft: 15,
+    paddingBottom: 2,
+    color: '#05375a',
   }
 });

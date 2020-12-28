@@ -8,6 +8,10 @@ const AccessListSchema = mongoose.Schema({
   media: { 
     type: Array,
     required: true
+  },
+  files: {
+    type: Array,
+    required: true
   }
 },
 {
