@@ -1,32 +1,32 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Block, Text } from 'expo-ui-kit';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
-import Drawer from './src/components/Drawer';
+import Login  from './src/components/Login';
+import Home from './src/components/Home';
+import MediaPlayer from './src/components/MediaPlayer'
+import Media from './src/components/Media';
 
-export default class Home extends React.Component {
+const RootStack = createStackNavigator(
+  {
+    Login: Login,
+    Home: Home,
+    Media: Media,
+    MediaPlayer: MediaPlayer
+  },
+  {
+    initialRouteName: "Home",
+    headerMode: 'none',
+    
+  },
+  
+);
 
-  state = {
-    student_id: ''
+const AppContainer = createAppContainer(RootStack);
+
+export default class App extends React.Component {
+
+  render(){
+    return <AppContainer />;
   }
-
-   render() {
-      
-      return (
-        <NavigationContainer>
-          <Drawer />
-          {}
-        </NavigationContainer>
-    );
-  } 
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
- });
