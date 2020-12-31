@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
-    width: '100%'
+    width: '100%',
+    maxWidth: 300,
   },
   footer_text: {
     color: '#05375a',
