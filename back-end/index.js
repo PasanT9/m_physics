@@ -12,7 +12,7 @@ const cors = require('cors');
 
 const user = require("./routes/user");
 const media = require("./routes/media");
-const file = require("./routes/file");
+
 //app.use('/', mediaRoutes)
 
 app.use(cors());
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", user);
 app.use("/media", media);
-app.use("file", file);
+//app.use("file", file);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);

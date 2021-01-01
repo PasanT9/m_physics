@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 
 const MediaScheme = mongoose.Schema({
-  media_id: {
+  id: {
     type: Number,
     required: true
   },
-  name: { 
+  title: { 
     type: String,
     required: true
   },
-  object: {
+  media_object: {
     type: String,
     required: true
   },
-  thumbnail: {
+  thumbnail_object: {
     type: String,
     required: true
   }

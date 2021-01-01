@@ -2,10 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 import * as Animatable from 'react-native-animatable'
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 
   state = {
     student_id: ''
@@ -18,6 +17,14 @@ export default class Home extends React.Component {
       this.props.navigation.navigate('Media',{ student_id },)
     }
   }
+
+  componentDidMount(){
+
+    this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
+      console.log("Student ID updated")
+    });
+   }
+
    render() {
       
 
@@ -34,7 +41,7 @@ export default class Home extends React.Component {
                   size = {65}
                   style = {styles.tab}
                 /> 
-                <Text style = {styles.text}> Lessons</Text>
+                <Text style = {styles.footer_text}> Lessons</Text>
             </Animatable.View>
             </TouchableOpacity>
 
@@ -48,7 +55,7 @@ export default class Home extends React.Component {
                     size = {65}
                     style = {styles.tab}
                   /> 
-                  <Text style = {styles.text}> Notes </Text>
+                  <Text style = {styles.footer_text}> Notes </Text>
               </Animatable.View>
             </TouchableOpacity>
 
@@ -58,8 +65,9 @@ export default class Home extends React.Component {
     );
   }
 }
+export default Home;
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   view: {
     backgroundColor: '#009387',
@@ -78,17 +86,15 @@ var styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: 'center',
     justifyContent: 'center',
-    display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
   },
   tab: {
     margin: 15,
     marginBottom: 5,
     marginTop: 5,
   },
-  text: {
-    flex: 1,
+  footer_text: {
+    color: "black",
     textAlign: 'center',
     fontWeight: 'bold',
   }

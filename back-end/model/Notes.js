@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const FileScheme = mongoose.Schema({
-  file_id: {
+const NoteScheme = mongoose.Schema({
+  id: {
     type: Number,
     required: true
   },
@@ -9,14 +9,14 @@ const FileScheme = mongoose.Schema({
     type: String,
     required: true
   },
-  object: {
+  note_object: {
     type: String,
     required: true
   }
 },
 {
- collection : 'files' 
+ collection : 'notes' 
 });
 
 // export model user with MediaScheme
-module.exports = mongoose.model("files", FileScheme);
+module.exports = mongoose.model("notes", NoteScheme);

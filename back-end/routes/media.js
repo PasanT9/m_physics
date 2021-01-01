@@ -75,6 +75,7 @@ function StreamGridFile(req, res, GridFile) {
       .isEmpty()
     ],
     async (req, res) => {
+      console.log(req.body);
       const errors = validationResult(req);
   
       if (!errors.isEmpty()) {
@@ -100,7 +101,7 @@ function StreamGridFile(req, res, GridFile) {
         let allowed_media = user.media;
 
         let media =  await Media.find({
-          media_id: allowed_media
+          id: allowed_media
         });
 
         console.log(media);

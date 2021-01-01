@@ -31,9 +31,9 @@ export default class Home extends React.Component {
         for(let i=0; i<res.media.length;++i){
            let item = {
               //uri: res.media[i].thumbnail,
-              title: res.media[i].name,
-              video_id: res.media[i].video,
-              uri: 'http://localhost:8081/media/thumbnail/'+res.media[i].thumbnail,
+              title: res.media[i].title,
+              video_id: res.media[i].media_object,
+              uri: 'http://localhost:8081/media/thumbnail/'+res.media[i].thumbnail_object,
               width: 64,
               height: 64
            }
@@ -92,7 +92,7 @@ var styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 100,
    //position: "absolute"
   },
   text: {
@@ -100,7 +100,7 @@ var styles = StyleSheet.create({
   },
   thumbnail: {
     marginTop: 70,
-    width: '70%',
-    height: '70%',
+    width: 200,
+    height: 150,
   },
  });

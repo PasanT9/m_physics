@@ -9,7 +9,7 @@ const AccessListSchema = mongoose.Schema({
     type: Array,
     required: true
   },
-  files: {
+  notes: {
     type: Array,
     required: true
   }
