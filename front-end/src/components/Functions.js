@@ -7,7 +7,7 @@ export const login = student => {
 
     console.log(data);
   
-    return fetch('http://localhost:8081/user/login/', {
+    return fetch('http://192.168.1.102:8081/user/login/', {
        method: 'POST',
        headers: {
          "Content-type": "application/json",
@@ -33,7 +33,7 @@ export const login = student => {
 
    console.log(data);
  
-   return fetch('http://localhost:8081/media/list/', {
+   return fetch('http://192.168.1.102:8081/media/list/', {
       method: 'POST',
       headers: {
         "Content-type": "application/json",

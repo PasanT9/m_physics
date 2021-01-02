@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { listMedia } from "./Functions";
 
-import { Image, ScrollView, Text } from 'react-native';
 
 export default class Home extends React.Component {
 
@@ -61,6 +60,7 @@ export default class Home extends React.Component {
       const { media_list } = this.state; 
       
       return (
+        <View style = {{"flex": 1}}>
           <ScrollView contentContainerStyle={styles.scrollView}>
 
             {media_list.map((item, i) => 
@@ -73,6 +73,7 @@ export default class Home extends React.Component {
               );
             })}
             </ScrollView>
+            </View>
         
     );
   }

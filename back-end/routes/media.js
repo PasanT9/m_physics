@@ -33,6 +33,7 @@ function StreamGridFile(req, res, GridFile) {
         'Accept-Ranges': 'bytes',
         'Content-Length': chunksize,
         //'Content-Type': GridFile.contentType
+        'Content-Type': "video/mp4"
       });
   
       // Set filepointer
