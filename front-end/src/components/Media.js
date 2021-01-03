@@ -60,47 +60,65 @@ export default class Home extends React.Component {
       const { media_list } = this.state; 
       
       return (
-        <View style = {styles.view}>
-          <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style = {styles.background}>
+          <View style = {styles.container}>
+          
+            <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
 
-            {media_list.map((item, i) => 
-            {
-              return (
-                <TouchableOpacity style = {styles.container} onPress={() => this.playVideo(item.video_id)} key={i} >
-                  <Image style = {styles.thumbnail} source={item} />
-                  <Text style = {styles.text} > {item.title} </Text> 
-                </TouchableOpacity>
-              );
-            })}
-            </ScrollView>
+              {media_list.map((item, i) => 
+              {
+                return (
+                  <TouchableOpacity style = {styles.thumbnailContainer} onPress={() => this.playVideo(item.video_id)} key={i} >
+                    <Image style = {styles.thumbnail} source={item} />
+                    <Text style = {styles.text} > {item.title} </Text> 
+                  </TouchableOpacity>
+                );
+              })}
+              </ScrollView>
             </View>
+        </View>
         
     );
   }
 }
 
-var styles = StyleSheet.create({
+
+const styles = StyleSheet.create({
+
+  background: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     alignItems: 'center',
+    backgroundColor: '#fff',
     display: 'flex',
     justifyContent: 'center',
-    marginTop: 20,
-  },
+    width: '100%'
+  },  
+
   scrollView: {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
+    width: "100%"
    //position: "absolute"
   },
   text: {
-    marginTop: 5,
+    marginTop: 10,
   },
   thumbnail: {
     marginTop: 50,
-    width: 200,
-    height: 150,
+    width: 350,
+    height: 200,
   },
-  view: {
-    marginBottom: 30,
-  }
+  thumbnailContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 20,
+    width: "100%"
+  },
  });
