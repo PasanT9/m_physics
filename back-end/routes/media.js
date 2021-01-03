@@ -32,8 +32,7 @@ function StreamGridFile(req, res, GridFile) {
         'Content-Range': 'bytes ' + start + '-' + end + '/' + GridFile.length,
         'Accept-Ranges': 'bytes',
         'Content-Length': chunksize,
-        //'Content-Type': GridFile.contentType
-        'Content-Type': "video/mp4"
+        //'Content-Type': "video/mp4"
       });
   
       // Set filepointer
@@ -60,7 +59,7 @@ function StreamGridFile(req, res, GridFile) {
   
       // stream back whole file
       console.log('No Range Request');
-      res.header('Content-Type', GridFile.contentType);
+      //res.header('Content-Type', GridFile.contentType);
       res.header('Content-Length', GridFile.length);
       var stream = GridFile.stream(true);
       stream.pipe(res);

@@ -12,7 +12,7 @@ export default class Home extends React.Component {
 
    componentDidMount(){
 
-    this.setState({ uri: "http://localhost:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
+    this.setState({ uri: "http://192.168.1.102:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
       console.log("url updated to "+ this.state.uri );
     });
    }

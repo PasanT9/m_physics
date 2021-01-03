@@ -32,7 +32,7 @@ export default class Home extends React.Component {
               //uri: res.media[i].thumbnail,
               title: res.media[i].title,
               video_id: res.media[i].media_object,
-              uri: 'http://localhost:8081/media/thumbnail/'+res.media[i].thumbnail_object,
+              uri: 'http://192.168.1.102:8081/media/thumbnail/'+res.media[i].thumbnail_object,
               width: 64,
               height: 64
            }
@@ -60,7 +60,7 @@ export default class Home extends React.Component {
       const { media_list } = this.state; 
       
       return (
-        <View style = {{"flex": 1}}>
+        <View style = {styles.view}>
           <ScrollView contentContainerStyle={styles.scrollView}>
 
             {media_list.map((item, i) => 
@@ -83,25 +83,24 @@ var styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     display: 'flex',
-    height: '50%',
     justifyContent: 'center',
     marginTop: 20,
-    width: '70%',
   },
   scrollView: {
     alignItems: 'center',
     display: 'flex',
-    height: '100%',
     justifyContent: 'center',
-    marginTop: 100,
    //position: "absolute"
   },
   text: {
     marginTop: 5,
   },
   thumbnail: {
-    marginTop: 70,
+    marginTop: 50,
     width: 200,
     height: 150,
   },
+  view: {
+    marginBottom: 30,
+  }
  });
