@@ -1,8 +1,10 @@
 import React from 'react';
-import {Dimensions, View } from 'react-native';
+import {Dimensions, SafeAreaView, View, StyleSheet } from 'react-native';
 import { Video } from 'expo-av';
 
 import { Image, ScrollView, Text } from 'react-native';
+
+import Header from './Header';
 
 export default class Home extends React.Component {
 
@@ -23,8 +25,9 @@ export default class Home extends React.Component {
       const { uri } = this.state;
       
       return (
-        <View>
-         <View >
+        <SafeAreaView style={styles.background}>
+          <Header dark={true}/>
+         <View>
             <Video
                source={{ uri: "http://192.168.1.102:8081/media/watch/5ff1b57d032d703b0803f6eb"}}
                rate={1.0}
@@ -35,12 +38,18 @@ export default class Home extends React.Component {
                isLooping
                controls
                resizeMode="contain"
-               style={{ width: "100%", height: "100%", marginTop:20 }}
+               style={{ width: "100%", height: "100%"}}
                />
 
         </View>
-        </View>
+        </SafeAreaView>
         
     );
   }
 }
+const styles = StyleSheet.create({
+
+  background: {
+    marginTop: Platform.OS === 'android' ? 25 : 0,
+  }
+ });

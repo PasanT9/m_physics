@@ -1,6 +1,8 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Image, ScrollView, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import { listMedia } from "./Functions";
+
+import Header from './Header';
 
 
 export default class Home extends React.Component {
@@ -62,7 +64,8 @@ export default class Home extends React.Component {
       
       return (
         
-        <View style = {styles.background}>
+        <SafeAreaView style = {styles.background}>
+          <Header dark={true}/>
           <View style = {styles.container}>
           
             <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -79,7 +82,7 @@ export default class Home extends React.Component {
               })}
               </ScrollView>
             </View>
-        </View>
+        </SafeAreaView>
         
     );
   }
@@ -90,13 +93,14 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
 
   background: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? 25 : 0,
   },
   container: {
+    marginTop: 50,
     alignItems: 'center',
-    backgroundColor: '#fff',
     display: 'flex',
     justifyContent: 'center',
     width: '100%'
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
   thumbnailContainer: {
     alignItems: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: '#f2f2f2',
+    borderBottomColor: '#009387',
     display: 'flex',
     flex: 1,
     justifyContent: 'center',
