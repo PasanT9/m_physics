@@ -26,12 +26,16 @@ class Login extends React.Component {
     login(student).then(res => {
       if(res){
           console.log("login success");
-          this.props.navigation.navigate('Home',{ student_id },)
+          this.props.navigation.navigate('Home', {student_id: student_id})
       }
       else{
         console.log("error");
       }
     })
+ }
+
+ componentDidMount(){
+  
  }
 
   render(){

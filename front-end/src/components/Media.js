@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { listMedia } from "./Functions";
 
 
@@ -59,7 +59,9 @@ export default class Home extends React.Component {
    render() {  
       const { media_list } = this.state; 
       
+      
       return (
+        
         <View style = {styles.background}>
           <View style = {styles.container}>
           
@@ -68,6 +70,7 @@ export default class Home extends React.Component {
               {media_list.map((item, i) => 
               {
                 return (
+                  
                   <TouchableOpacity style = {styles.thumbnailContainer} onPress={() => this.playVideo(item.video_id)} key={i} >
                     <Image style = {styles.thumbnail} source={item} />
                     <Text style = {styles.text} > {item.title} </Text> 
@@ -82,6 +85,7 @@ export default class Home extends React.Component {
   }
 }
 
+const { width } = Dimensions.get('window');    
 
 const styles = StyleSheet.create({
 
@@ -107,14 +111,18 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
+    marginBottom: 20,
   },
   thumbnail: {
-    marginTop: 50,
-    width: 350,
+    marginTop: 20,
+    maxWidth: 350,
+    width: width - 10,
     height: 200,
   },
   thumbnailContainer: {
     alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#f2f2f2',
     display: 'flex',
     flex: 1,
     justifyContent: 'center',
