@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
 import Feather from 'react-native-vector-icons/Feather';
+
+
 
 export default class Header extends React.Component {
 
@@ -14,7 +17,7 @@ export default class Header extends React.Component {
         
         <View style = {dark? styles.headerContainerDark: styles.headerContainerLight} >
             <Text style = {dark? styles.headerTextDark: styles.headerTextLight}>M_PHYSICS</Text>
-            <TouchableOpacity onPress={() => this.continue('logOut')} style={styles.icon}>
+            <TouchableOpacity onPress={() => this.props.logOut()} style={styles.icon}>
               <Animatable.View
                   animation='bounceIn'
                 >

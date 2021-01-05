@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform  } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
 import Feather from 'react-native-vector-icons/Feather';
@@ -15,12 +16,17 @@ class Home extends React.Component {
     }
   }
 
+  logOut() {
+    SecureStore.deleteItemAsync('jwt');
+    this.props.navigation.navigate('Login');
+  }
+
    render() {
       
 
       return (
           <SafeAreaView style = {styles.view}>
-            <Header dark={false} />
+            <Header dark={false} onRef = {ref => (this.logOut = ref)} logOut = {this.logOut.bind(this)} />
             <View style = {styles.outerContainer}>
             <View style = {styles.container}>
               <TouchableOpacity onPress={() => this.continue('lessons')}>

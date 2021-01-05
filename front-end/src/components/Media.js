@@ -50,6 +50,11 @@ export default class Home extends React.Component {
 
    }
 
+   logOut() {
+    SecureStore.deleteItemAsync('jwt');
+    this.props.navigation.navigate('Login');
+  }
+
    componentDidMount(){
 
     SecureStore.getItemAsync("jwt").then(jwt => {
@@ -70,7 +75,7 @@ export default class Home extends React.Component {
       return (
         
         <SafeAreaView style = {styles.background}>
-          <Header dark={true}/>
+          <Header dark={false} onRef = {ref => (this.logOut = ref)} logOut = {this.logOut.bind(this)} />
           <View style = {styles.container}>
           
             <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
