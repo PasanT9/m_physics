@@ -1,5 +1,7 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Image, ScrollView, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
+
 import { listMedia } from "./Functions";
 
 import Header from './Header';
@@ -8,10 +10,10 @@ import Header from './Header';
 export default class Home extends React.Component {
 
     state = {
-        student_id: '',
-        mute: false,
-        shouldPlay: true,
-        media_list : [],
+      jwt: '',
+      mute: false,
+      shouldPlay: true,
+      media_list : [],
     }
 
     constructor() {
@@ -22,10 +24,11 @@ export default class Home extends React.Component {
 
     getMediaList = () => {
 
-      let {student_id} = this.state;
+      const { jwt } = this.state; 
+      console.log(jwt);
 
-      listMedia(student_id).then(res => {
-
+      listMedia(jwt).then(res => {
+        console.log("SUCCESS");
         console.log(res.media);
 
         let media_list = [];
@@ -34,7 +37,7 @@ export default class Home extends React.Component {
               //uri: res.media[i].thumbnail,
               title: res.media[i].title,
               video_id: res.media[i].media_object,
-              uri: 'http://192.168.1.102:8081/media/thumbnail/'+res.media[i].thumbnail_object,
+              uri: 'http://192.168.43.101:8081/media/thumbnail/'+res.media[i].thumbnail_object,
               width: 64,
               height: 64
            }
@@ -42,16 +45,18 @@ export default class Home extends React.Component {
         }
         this.setState({ media_list: media_list}, function() {
           console.log("media list updated");
-        });
+        })
       });
 
    }
 
    componentDidMount(){
 
-    this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
+    SecureStore.getItemAsync("jwt").then(jwt => {
+      this.setState({ jwt });
       this.getMediaList();
     });
+
    }
 
    playVideo(video_id){

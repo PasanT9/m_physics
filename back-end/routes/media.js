@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator/check");
 
 const AccessList = require("../model/AccessList");
@@ -67,15 +68,17 @@ function StreamGridFile(req, res, GridFile) {
   }
 
 
-  router.post(
+  router.get(
     "/list",
-    [
-      check("student_id", "Please enter a valid student ID")
-      .not()
-      .isEmpty()
-    ],
+    [],
     async (req, res) => {
+
       console.log(req.body);
+      const authHeader = req.headers['authorization']
+      const token = authHeader && authHeader.split(' ')[1]
+
+      console.log(token);
+      
       const errors = validationResult(req);
   
       if (!errors.isEmpty()) {
@@ -84,9 +87,10 @@ function StreamGridFile(req, res, GridFile) {
         });
       }
 
-      const { student_id } = req.body;
-
       try {
+        const verifiedJwt = jwt.verify(token, 'randomString');
+
+        const student_id = verifiedJwt.user.student_id;
 
         let user = await AccessList.findOne({
           student_id
@@ -105,16 +109,14 @@ function StreamGridFile(req, res, GridFile) {
         });
 
         console.log(media);
-
-        //let thumbnails = media.map(a => a.thumbnail);
         res.status(200).json({
           media
         });
       }
       catch(e)
       {
-        res.status(500).json({
-          message: "Server Error"
+        res.status(401).json({
+          message: "Unauthorized"
         });
       }
     }

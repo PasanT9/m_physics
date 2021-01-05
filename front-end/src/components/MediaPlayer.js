@@ -1,6 +1,7 @@
 import React from 'react';
 import {Dimensions, SafeAreaView, View, StyleSheet } from 'react-native';
 import { Video } from 'expo-av';
+import { useDeviceOrientation } from "@react-native-community/hooks";
 
 import { Image, ScrollView, Text } from 'react-native';
 
@@ -14,24 +15,23 @@ export default class Home extends React.Component {
 
    componentDidMount(){
 
-    this.setState({ uri: "http://192.168.1.102:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
+    this.setState({ uri: "http://192.168.43.101:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
       console.log("url updated to "+ this.state.uri );
     });
    }
 
-
-   render() {
-      const { width } = Dimensions.get('window');     
+   render() {    
       const { uri } = this.state;
+      
       
       return (
         <SafeAreaView style={styles.background}>
-          <Header dark={true}/>
          <View>
             <Video
-               source={{ uri: "http://192.168.1.102:8081/media/watch/5ff1b57d032d703b0803f6eb"}}
+               source={{ uri: "http://192.168.43.101:8081/media/watch/5ff1b57d032d703b0803f6eb"}}
                rate={1.0}
                volume={1.0}
+               useNativeControls
                isMuted={false}
                resizeMode="cover"
                shouldPlay
@@ -47,9 +47,10 @@ export default class Home extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
 
   background: {
-    marginTop: Platform.OS === 'android' ? 25 : 0,
+    //marginTop: Platform.OS === 'android' ? 25 : 0,
   }
  });

@@ -8,24 +8,12 @@ import Header from "./Header";
 
 class Home extends React.Component {
 
-  state = {
-    student_id: ''
-  }
 
   continue(screen){
-    const {student_id } = this.state;
-
     if(screen == "lessons"){
-      this.props.navigation.navigate('Media',{ student_id },)
+      this.props.navigation.navigate('Media')
     }
   }
-
-  componentDidMount(){
-
-    this.setState({ student_id: this.props.navigation.state.params.student_id}, function() {
-      console.log("Student ID updated")
-    });
-   }
 
    render() {
       

@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
+
 import { login } from "./Functions";
 
 import * as Animatable from 'react-native-animatable'
@@ -18,6 +20,7 @@ class Login extends React.Component {
     e.preventDefault(); 
 
     const {student_id, password } = this.state;
+
     let student = {
       student_id: student_id,
       password: password,
@@ -25,16 +28,24 @@ class Login extends React.Component {
 
     login(student).then(res => {
       if(res){
-          console.log("login success");
-          this.props.navigation.navigate('Home', {student_id})
+        SecureStore.setItemAsync('jwt',res.token);
+        this.props.navigation.navigate('Home')
       }
       else{
-        console.log("error");
+        console.log("errr");
       }
     })
  }
 
  componentDidMount(){
+   
+  SecureStore.getItemAsync("jwt").then(jwt => {
+    if(jwt){
+      console.log("Already logged in");
+      this.props.navigation.navigate('Home')
+    }
+  });
+
 
  }
 
