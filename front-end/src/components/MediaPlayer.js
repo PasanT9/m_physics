@@ -15,7 +15,7 @@ export default class Home extends React.Component {
 
    componentDidMount(){
 
-    this.setState({ uri: "http://192.168.43.101:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
+    this.setState({ uri: "http://192.168.43.100:8081/media/watch/" +this.props.navigation.state.params.video_id}, function() {
       console.log("url updated to "+ this.state.uri );
     });
    }
@@ -28,7 +28,7 @@ export default class Home extends React.Component {
         <SafeAreaView style={styles.background}>
          <View>
             <Video
-               source={{ uri: "http://192.168.43.101:8081/media/watch/5ff1b57d032d703b0803f6eb"}}
+               source={{ uri: "http://192.168.43.100:8081/media/watch/5ff1b57d032d703b0803f6eb"}}
                rate={1.0}
                volume={1.0}
                useNativeControls

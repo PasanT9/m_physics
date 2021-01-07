@@ -7,7 +7,7 @@ export const login = student => {
 
     console.log(data);
   
-    return fetch('http://192.168.43.101:8081/user/login/', {
+    return fetch('http://192.168.43.100:8081/user/login/', {
        method: 'POST',
        headers: {
          "Content-type": "application/json",
@@ -30,7 +30,7 @@ export const login = student => {
 
    var bearer = 'Bearer ' + jwt;
  
-   return fetch('http://192.168.43.101:8081/media/list/', {
+   return fetch('http://192.168.43.100:8081/media/list/', {
       method: 'GET',
       headers: {
         "Content-type": "application/json",

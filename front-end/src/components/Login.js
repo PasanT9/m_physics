@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import { login } from "./Functions";
@@ -124,6 +124,7 @@ class Login extends React.Component {
               color="#009387"
             />
           </View>
+          <Image style = {styles.signature} source={require('./../images/signature.jpeg')} />
         </View>
       </View>
     );
@@ -140,7 +141,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },  
   button: {
-    
   },
   button_container: {
     marginTop: 40,
@@ -194,6 +194,11 @@ const styles = StyleSheet.create({
   inputText:{
     height:50,
     color:"white"
+  },
+  signature: {
+    width: '100%',
+    height: 100,
+    marginTop: 40,
   },
   text_input: {
     flex: 1,
