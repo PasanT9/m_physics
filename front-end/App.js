@@ -15,7 +15,7 @@ const RootStack = createStackNavigator(
     MediaPlayer: MediaPlayer
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "Home",
     headerMode: 'none',
     
   },

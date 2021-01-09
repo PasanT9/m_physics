@@ -33,6 +33,7 @@ class Home extends React.Component {
             <Animatable.View
                 animation='bounceIn'
               >
+              <View style = {{flexDirection: 'row'}}>
                 <Feather 
                   name="video"
                   color="#05375a"
@@ -40,6 +41,7 @@ class Home extends React.Component {
                   style = {styles.tab}
                 /> 
                 <Text style = {styles.footer_text}> Lessons</Text>
+            </View>
             </Animatable.View>
             </TouchableOpacity>
 
@@ -47,6 +49,7 @@ class Home extends React.Component {
               <Animatable.View
                   animation='bounceIn'
                 >
+                  <View style = {{flexDirection: 'row'}}>
                   <Feather 
                     name="file-text"
                     color="#05375a"
@@ -54,12 +57,14 @@ class Home extends React.Component {
                     style = {styles.tab}
                   /> 
                   <Text style = {styles.footer_text}> Notes </Text>
+                  </View>
               </Animatable.View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.continue('user')}>
               <Animatable.View
                   animation='bounceIn'
                 >
+                  <View style = {{flexDirection: 'row'}}>
                   <Feather 
                     name="user"
                     color="#05375a"
@@ -67,14 +72,15 @@ class Home extends React.Component {
                     style = {styles.tab}
                   /> 
                   <Text style = {styles.footer_text}> Profile </Text>
+                  </View>
               </Animatable.View>
             </TouchableOpacity>
 
-            <View style = {{ flex: 1 }}>
             <TouchableOpacity onPress={() => this.continue('message')}>
               <Animatable.View
                   animation='bounceIn'
                 >
+                  <View style = {{flexDirection: 'row'}}>
                   <Feather 
                     name="message-square"
                     color="#05375a"
@@ -82,9 +88,9 @@ class Home extends React.Component {
                     style = {styles.tab}
                   /> 
                   <Text style = {styles.footer_text}> Messages </Text>
+                  </View>
               </Animatable.View>
             </TouchableOpacity>
-            </View>
 
             </View>
             </View>
@@ -112,24 +118,28 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     maxWidth: 250,
     minWidth: 250,
-    maxHeight: height*0.5,
-    minHeight: height*0.5,
+    maxHeight: height*0.50,
+    minHeight: height*0.50,
     backgroundColor: "#fff",
-    marginTop: "30%",
+    marginTop: "25%",
   },
   container: {
-    justifyContent: 'space-around',
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   tab: {
     margin: 15,
     marginBottom: 5,
-    marginTop: 5,
+    marginTop: 8,
+    marginLeft: 20,
   },
   footer_text: {
-    color: "black",
+    color:"#05375a",
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
   signature: {
     marginTop: 'auto',
