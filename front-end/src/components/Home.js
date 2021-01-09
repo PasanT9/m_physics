@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform,Image  } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform,Image  } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
@@ -70,7 +70,7 @@ class Home extends React.Component {
               </Animatable.View>
             </TouchableOpacity>
 
-            
+            <View style = {{ flex: 1 }}>
             <TouchableOpacity onPress={() => this.continue('message')}>
               <Animatable.View
                   animation='bounceIn'
@@ -84,6 +84,7 @@ class Home extends React.Component {
                   <Text style = {styles.footer_text}> Messages </Text>
               </Animatable.View>
             </TouchableOpacity>
+            </View>
 
             </View>
             </View>
@@ -94,6 +95,8 @@ class Home extends React.Component {
   }
 }
 export default Home;
+
+const { height,width } = Dimensions.get('window');    
 
 const styles = StyleSheet.create({
 
@@ -109,16 +112,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     maxWidth: 250,
     minWidth: 250,
-    maxHeight: 250,
-    minHeight: 250,
+    maxHeight: height*0.5,
+    minHeight: height*0.5,
     backgroundColor: "#fff",
     marginTop: "30%",
   },
   container: {
-    marginTop: 20,
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
   tab: {
     margin: 15,
@@ -129,12 +129,13 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: 'center',
     fontWeight: 'bold',
+    fontSize: 20,
   },
   signature: {
     marginTop: 'auto',
     marginBottom: 'auto',
-    height: 200,
-    width: 200
+    height: height*0.25,
+    width: width*0.7,
   }
  });
 
