@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, SafeAreaView } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import { login } from "./Functions";
@@ -54,9 +54,9 @@ class Login extends React.Component {
     const { student_id, secure_password } = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.header_text}>M Physics</Text>
+        <Image style = {styles.logo} source={require('./../images/logo.jpeg')} />
         </View>
         <View style={styles.footer}>
 
@@ -126,7 +126,7 @@ class Login extends React.Component {
           </View>
           <Image style = {styles.signature} source={require('./../images/signature.jpeg')} />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   },
   button_container: {
     marginTop: 40,
+    marginBottom: 15,
   },
   footer: {
     flex: 3,
@@ -160,27 +161,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },  
   header: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: 50,
+    height: "30%",
+    marginTop: Platform.OS === 'android' ? 25 : 0,
+  }, 
+  logo: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    width: 200,
+    height: 170
   },
-  header_text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 35,
-  },  
   container: {
     flex: 1,
     backgroundColor: '#009387',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  logo:{
-    fontWeight:"bold",
-    fontSize:50,
-    color:"#fb5b5a",
-    marginBottom:40
   },
   inputView:{
     width:"80%",
@@ -198,7 +192,8 @@ const styles = StyleSheet.create({
   signature: {
     width: '100%',
     height: 100,
-    marginTop: 40,
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   text_input: {
     flex: 1,

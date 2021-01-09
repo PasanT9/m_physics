@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform  } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform,Image  } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
@@ -87,6 +87,7 @@ class Home extends React.Component {
 
             </View>
             </View>
+            <Image style = {styles.signature} source={require('./../images/signature-dark.jpeg')} />
           </SafeAreaView>
         
     );
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     maxHeight: 250,
     minHeight: 250,
     backgroundColor: "#fff",
-    marginTop: 50,
+    marginTop: "30%",
   },
   container: {
     marginTop: 20,
@@ -128,6 +129,12 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  signature: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    height: 200,
+    width: 200
   }
  });
 

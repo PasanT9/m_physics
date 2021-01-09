@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
@@ -16,7 +16,7 @@ export default class Header extends React.Component {
       return (
         
         <View style = {dark? styles.headerContainerDark: styles.headerContainerLight} >
-            <Text style = {dark? styles.headerTextDark: styles.headerTextLight}>M_PHYSICS</Text>
+            <Image style = {styles.logo} source={require('./../images/logo-dark.jpeg')} />
             <TouchableOpacity onPress={() => this.props.logOut()} style={styles.icon}>
               <Animatable.View
                   animation='bounceIn'
@@ -36,6 +36,10 @@ export default class Header extends React.Component {
 
 const styles = StyleSheet.create({
 
+    logo: {
+      height: 45,
+      width: "70%",
+    },
     headerContainerDark: {
         borderWidth: 1,
         borderRadius: 2,

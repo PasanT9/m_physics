@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                isLooping
                controls
                resizeMode="contain"
-               style={{ width: "100%", height: "100%"}}
+               style={{ width: "100%", height: "100%", backgroundColor: "black"}}
                />
 
         </View>
