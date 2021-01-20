@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Image, Dimensions } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import { login } from "./Functions";
@@ -7,6 +7,7 @@ import { login } from "./Functions";
 import * as Animatable from 'react-native-animatable'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class Login extends React.Component {
 
@@ -27,6 +28,7 @@ class Login extends React.Component {
     };
 
     login(student).then(res => {
+      console.log(res);
       if(res){
         SecureStore.setItemAsync('jwt',res.token);
         this.props.navigation.navigate('Home')
@@ -54,7 +56,8 @@ class Login extends React.Component {
     const { student_id, secure_password } = this.state;
 
     return (
-      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle = {styles.scroll}>
+      <View style={styles.container}>
         <View style={styles.header}>
         <Image style = {styles.logo} source={require('./../images/logo.jpeg')} />
         </View>
@@ -126,16 +129,22 @@ class Login extends React.Component {
           </View>
           <Image style = {styles.signature} source={require('./../images/signature.jpeg')} />
         </View>
-      </SafeAreaView>
+      </View>
+        </ScrollView>
     );
   }
 }
 export default Login;
 
+
+const { height,width } = Dimensions.get('window');    
+
 const styles = StyleSheet.create({
+  scroll:{
+    height: height,
+  },
   action: {
     flexDirection: 'row',
-    marginTop: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
@@ -175,6 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#009387',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 0,
   },
   inputView:{
     width:"80%",

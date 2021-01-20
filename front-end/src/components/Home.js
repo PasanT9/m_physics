@@ -206,7 +206,7 @@ const styles_portrait = StyleSheet.create({
     height: "40%",
     width: "70%",
     backgroundColor: "#fff",
-    marginTop: "15%",
+    marginTop: "13%",
   },
   container: {
     justifyContent: 'center',

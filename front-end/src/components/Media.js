@@ -37,7 +37,7 @@ export default class Home extends React.Component {
               //uri: res.media[i].thumbnail,
               title: res.media[i].title,
               video_id: res.media[i].media_object,
-              uri: 'http://192.168.43.100:8081/media/thumbnail/'+res.media[i].thumbnail_object,
+              uri: 'http://192.168.1.101:8081/media/thumbnail/'+res.media[i].thumbnail_object,
               width: 64,
               height: 64
            }
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
       return (
         
         <SafeAreaView style = {styles.background}>
-          <Header dark={false} onRef = {ref => (this.logOut = ref)} logOut = {this.logOut.bind(this)} />
+          <Header dark={true} onRef = {ref => (this.logOut = ref)} logOut = {this.logOut.bind(this)} />
           <View style = {styles.container}>
           
             <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     marginTop: 20,
-    maxWidth: 350,
+    maxWidth: 400,
     width: width - 10,
     height: 200,
   },
