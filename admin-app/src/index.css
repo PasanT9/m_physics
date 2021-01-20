@@ -34,3 +34,8 @@ code {
 a {
   font-size: 12px;
 }
+
+.nav-bar {
+  background-color: "#00938";
+  color: red;
+}

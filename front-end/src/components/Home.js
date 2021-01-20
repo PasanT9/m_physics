@@ -23,6 +23,9 @@ class Home extends React.Component {
     if(screen == "lessons"){
       this.props.navigation.navigate('Media')
     }
+    if(screen == "tasks"){
+      this.props.navigation.navigate('Tasks')
+    }
   }
 
   logOut() {
@@ -81,18 +84,18 @@ class Home extends React.Component {
             </Animatable.View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.continue('notes')}>
+            <TouchableOpacity onPress={() => this.continue('tasks')}>
               <Animatable.View
                   animation='bounceIn'
                 >
                   <View style = {styles.icon}>
                   <Feather 
-                    name="file-text"
+                    name="check-square"
                     color="#05375a"
                     size = {65}
                     style = {styles.tab}
                   /> 
-                  <Text style = {styles.footer_text}> Notes </Text>
+                  <Text style = {styles.footer_text}> Tasks </Text>
                   </View>
               </Animatable.View>
             </TouchableOpacity>
@@ -102,12 +105,12 @@ class Home extends React.Component {
                 >
                   <View style ={styles.icon}>
                   <Feather 
-                    name="user"
+                    name="file-text"
                     color="#05375a"
                     size = {65}
                     style = {styles.tab}
                   /> 
-                  <Text style = {styles.footer_text}> Profile </Text>
+                  <Text style = {styles.footer_text}> Marks </Text>
                   </View>
               </Animatable.View>
             </TouchableOpacity>
@@ -118,12 +121,12 @@ class Home extends React.Component {
                 >
                   <View style = {styles.icon}>
                   <Feather 
-                    name="message-square"
+                    name="calendar"
                     color="#05375a"
                     size = {65}
                     style = {styles.tab}
                   /> 
-                  <Text style = {styles.footer_text}> Messages </Text>
+                  <Text style = {styles.footer_text}> Calender </Text>
                   </View>
               </Animatable.View>
             </TouchableOpacity>
@@ -209,7 +212,7 @@ const styles_portrait = StyleSheet.create({
     marginTop: "13%",
   },
   container: {
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignContent: 'center',
     marginTop: 'auto',
     marginBottom: 'auto',

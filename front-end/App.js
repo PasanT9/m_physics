@@ -6,16 +6,18 @@ import Login  from './src/components/Login';
 import Home from './src/components/Home';
 import MediaPlayer from './src/components/MediaPlayer'
 import Media from './src/components/Media';
+import Tasks from './src/components/Tasks'
 
 const RootStack = createStackNavigator(
   {
     Login: Login,
     Home: Home,
     Media: Media,
-    MediaPlayer: MediaPlayer
+    MediaPlayer: MediaPlayer,
+    Tasks: Tasks
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Tasks",
     headerMode: 'none',
     
   },

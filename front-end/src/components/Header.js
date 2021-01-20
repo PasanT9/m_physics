@@ -16,7 +16,12 @@ export default class Header extends React.Component {
       return (
         
         <View style = {dark? styles.headerContainerDark: styles.headerContainerLight} >
-            <Image style = {styles.logo} source={require('./../images/logo-dark.jpeg')} />
+          { dark?
+            <Image style = {styles.logo} source={(require('./../images/logo-light.jpg'))} />
+            :
+            <Image style = {styles.logo} source={(require('./../images/logo-dark.jpeg'))} />
+          }
+            
             <TouchableOpacity onPress={() => this.props.logOut()} style={styles.icon}>
               <Animatable.View
                   animation='bounceIn'
