@@ -1,13 +1,22 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform,Image  } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform,Image, Orientation  } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
 import Feather from 'react-native-vector-icons/Feather';
 
+import * as ScreenOrientation from 'expo-screen-orientation';
+
+
 import Header from "./Header";
 
+
+
 class Home extends React.Component {
+
+  state = {
+    orientation: 'portrait', 
+  }
 
 
   continue(screen){
@@ -21,8 +30,35 @@ class Home extends React.Component {
     this.props.navigation.navigate('Login');
   }
 
+  getOrientation = () =>
+  {
+    console.log("change");
+    const { height,width } = Dimensions.get('window');    
+
+    if(height > width){
+      this.setState({ orientation: 'portrait' });
+    }
+    else{
+      this.setState({ orientation: 'landscape' });
+    }
+
+  }
+
+  componentDidMount()
+  {
+    this.getOrientation();
+    
+    Dimensions.addEventListener( 'change', () =>
+    {
+      this.getOrientation();
+    });
+  }
+
+
    render() {
-      
+     const {orientation} = this.state;
+
+      const styles = (orientation == "portrait")? styles_portrait : styles_landscape;
 
       return (
           <SafeAreaView style = {styles.view}>
@@ -33,7 +69,7 @@ class Home extends React.Component {
             <Animatable.View
                 animation='bounceIn'
               >
-              <View style = {{flexDirection: 'row'}}>
+              <View style = {styles.icon}>
                 <Feather 
                   name="video"
                   color="#05375a"
@@ -49,7 +85,7 @@ class Home extends React.Component {
               <Animatable.View
                   animation='bounceIn'
                 >
-                  <View style = {{flexDirection: 'row'}}>
+                  <View style = {styles.icon}>
                   <Feather 
                     name="file-text"
                     color="#05375a"
@@ -64,7 +100,7 @@ class Home extends React.Component {
               <Animatable.View
                   animation='bounceIn'
                 >
-                  <View style = {{flexDirection: 'row'}}>
+                  <View style ={styles.icon}>
                   <Feather 
                     name="user"
                     color="#05375a"
@@ -80,7 +116,7 @@ class Home extends React.Component {
               <Animatable.View
                   animation='bounceIn'
                 >
-                  <View style = {{flexDirection: 'row'}}>
+                  <View style = {styles.icon}>
                   <Feather 
                     name="message-square"
                     color="#05375a"
@@ -104,8 +140,11 @@ export default Home;
 
 const { height,width } = Dimensions.get('window');    
 
-const styles = StyleSheet.create({
 
+const styles_portrait = StyleSheet.create({
+  icon: {
+    flexDirection: "row",
+  },
   view: {
     backgroundColor: '#009387',
     flex: 1,
@@ -118,8 +157,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     maxWidth: 250,
     minWidth: 250,
-    maxHeight: height*0.50,
-    minHeight: height*0.50,
+    maxHeight: "50%",
+    minHeight: "50%",
     backgroundColor: "#fff",
     marginTop: "25%",
   },
@@ -144,8 +183,58 @@ const styles = StyleSheet.create({
   signature: {
     marginTop: 'auto',
     marginBottom: 'auto',
-    height: height*0.25,
-    width: width*0.7,
+    height: "25%",
+    width: "70%",
   }
  });
+
+ const styles_landscape = StyleSheet.create({
+  icon: {
+    flexDirection: "column",
+    width: 100,
+  },
+  view: {
+    backgroundColor: '#009387',
+    flex: 1,
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: Platform.OS === 'android' ? 25 : 0
+  },
+  outerContainer: {
+    borderRadius: 20,
+    height: "40%",
+    width: "70%",
+    backgroundColor: "#fff",
+    marginTop: "15%",
+  },
+  container: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    flexDirection: 'row',
+  },
+  tab: {
+    margin: 15,
+    marginBottom: 5,
+    marginTop: 8,
+    marginLeft: 20,
+  },
+  footer_text: {
+    color:"#05375a",
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop: 'auto',
+    marginBottom: 'auto'
+  },
+  signature: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    height: "30%",
+    width: "25%",
+  }
+ });
+
 

@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
 
     logo: {
       height: 45,
-      width: "70%",
+      width: 200,
+      height: "90%"
     },
     headerContainerDark: {
         borderWidth: 1,
@@ -82,11 +83,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       flexDirection: 'row',
       
-  },
-  headerTextLight: {
-      color: "#05375a",
-      fontSize: 18,
-      fontWeight: 'bold'
   },
     icon: {
         position: 'absolute',
