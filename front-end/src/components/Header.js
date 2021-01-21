@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
       height: "90%"
     },
     headerContainerDark: {
+      position: 'absolute',
         borderWidth: 1,
         borderRadius: 2,
         borderColor: '#ddd',
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     headerContainerLight: {
+      position: 'absolute',
       borderWidth: 1,
       borderRadius: 2,
       borderColor: '#ddd',
