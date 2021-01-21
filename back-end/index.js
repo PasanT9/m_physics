@@ -12,6 +12,7 @@ const cors = require('cors');
 
 const user = require("./routes/user");
 const media = require("./routes/media");
+const task = require("./routes/task");
 
 //app.use('/', mediaRoutes)
 
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
 
 app.use("/user", user);
 app.use("/media", media);
+app.use("/task", task)
+
 //app.use("file", file);
 
 app.listen(PORT, (req, res) => {

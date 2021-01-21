@@ -53,7 +53,7 @@ export default class Home extends React.Component {
    logOut() {
     SecureStore.deleteItemAsync('jwt');
     this.props.navigation.navigate('Login');
-  }
+  } 
 
    componentDidMount(){
 

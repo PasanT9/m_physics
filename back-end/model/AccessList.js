@@ -9,7 +9,7 @@ const AccessListSchema = mongoose.Schema({
     type: Array,
     required: true
   },
-  notes: {
+  tasks: {
     type: Array,
     required: true
   }

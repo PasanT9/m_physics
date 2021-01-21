@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
 
 import * as Animatable from 'react-native-animatable'
 import Feather from 'react-native-vector-icons/Feather';

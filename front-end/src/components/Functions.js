@@ -50,3 +50,29 @@ export const login = student => {
       console.log(err)
    })
 }
+
+export const listTask = (jwt) => {
+
+
+   var bearer = 'Bearer ' + jwt;
+ 
+   return fetch('http://192.168.1.101:8081/task/list/', {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': bearer,
+        'Access-Control-Allow-Origin': '*'
+      }
+   })
+   .then(response => {
+      if(response.status == 200) {
+         return response.json();
+      }
+      else{
+         console.log("error");
+      }
+   })
+   .catch(err => {
+      console.log(err)
+   })
+}

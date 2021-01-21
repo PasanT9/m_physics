@@ -17,7 +17,7 @@ const RootStack = createStackNavigator(
     Tasks: Tasks
   },
   {
-    initialRouteName: "Tasks",
+    initialRouteName: "Login",
     headerMode: 'none',
     
   },
